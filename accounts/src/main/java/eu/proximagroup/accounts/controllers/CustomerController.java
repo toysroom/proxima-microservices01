@@ -31,6 +31,7 @@ public class CustomerController {
 		this.customerService = customerService;
 	}
 	
+	// restituisce la lista di customers
 	@GetMapping
 	public ResponseEntity<List<Customer>> index()
 	{
