@@ -18,17 +18,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import eu.proximagroup.accounts.entities.Customer;
 import eu.proximagroup.accounts.services.CustomerService;
+import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/customers")
 public class CustomerController {
 
+	private EntityManager entityManager;
 	private CustomerService customerService;
 	
-	public CustomerController(CustomerService customerService)
+	public CustomerController(
+		CustomerService customerService, 
+		EntityManager entityManager
+	)
 	{
 		this.customerService = customerService;
+		this.entityManager = entityManager;
 	}
 	
 	// restituisce la lista di customers
@@ -67,22 +73,26 @@ public class CustomerController {
 	@PutMapping("/{id}")
 	public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody Customer customer, BindingResult result)
 	{
-		Optional<Customer> customerOptional = this.customerService.getById(id);
-		if (customerOptional.isEmpty())
-		{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Customer not found");
-		}
 		
-		System.out.println("CreatedAt: " + customerOptional.get().getCreatedAt());
 		if (result.hasErrors()) {
             List<String> errorMessages = new ArrayList<>();
             result.getAllErrors().forEach(error -> errorMessages.add(error.getDefaultMessage()));
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessages);
         }
 		
-		Customer customerUpdated = this.customerService.update(customer, id);
-		System.out.println("CreatedAt: " + customerUpdated);
-		return ResponseEntity.status(HttpStatus.OK).body(customerUpdated);
+		Optional<Customer> customerOptional = this.customerService.getById(id);
+		if (customerOptional.isEmpty())
+		{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Customer not found");
+		}
+				
+		this.customerService.update(customer, id);
+		
+		this.entityManager.clear();
+		
+		Optional<Customer> customerUpdated = this.customerService.getById(id);
+
+		return ResponseEntity.status(HttpStatus.OK).body(customerUpdated.get());
 	}
 	
 	@DeleteMapping("/{id}")
