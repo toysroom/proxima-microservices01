@@ -30,7 +30,8 @@ public class AccountService {
 		return this.accountRepository.save(account);
 	}
 	
-	public Account update(Account account) {
+	public Account update(Account account, Long id) {
+		account.setId(id);
 		return this.accountRepository.save(account);
 	}
 

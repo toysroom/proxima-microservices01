@@ -5,8 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,15 +23,16 @@ public class Account extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-    @Column(name="account_number")
-    @NotEmpty(message = "account_number is required")
+    @Column
     private String accountNumber;
 
-    @Column(name="account_type")
-    @NotEmpty(message = "account_type is required")
+    @Column
     private String accountType;
 
     @Column(name="branch_address")
-    @NotEmpty(message = "branch_address is required")
     private String branchAddress;
+    
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Customer customer;
 }
