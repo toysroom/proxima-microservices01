@@ -15,6 +15,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+// commento
 @Getter @Setter @ToString
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
