@@ -34,7 +34,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/customers/1",
+							"raw": "http://{{baseUrl}}/{{prefix}}/customers/55555",
 							"protocol": "http",
 							"host": [
 								"{{baseUrl}}"
@@ -42,7 +42,7 @@
 							"path": [
 								"{{prefix}}",
 								"customers",
-								"1"
+								"55555"
 							]
 						}
 					},
@@ -75,7 +75,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"firstName\": \"pippo1\",\n    \"lastName\": \"pippo2\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
+							"raw": "{\n    \"firstName\": \"aaaa\",\n    \"lastName\": \"bbbb\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -131,7 +131,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"firstName\": \"pippo1\",\n    \"lastName\": \"pippo2\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
+							"raw": "{\n    \"firstName\": \"cccc\",\n    \"lastName\": \"ddddddd\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -139,7 +139,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/customers/1",
+							"raw": "http://{{baseUrl}}/{{prefix}}/customers/2",
 							"protocol": "http",
 							"host": [
 								"{{baseUrl}}"
@@ -147,7 +147,7 @@
 							"path": [
 								"{{prefix}}",
 								"customers",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -183,13 +183,13 @@
 					"response": []
 				},
 				{
-					"name": "customers - 204",
+					"name": "customers/email - 200",
 					"request": {
-						"method": "DELETE",
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"firstName\": \"pippo1\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
+							"raw": "{\n    \"firstNam\": \"pippo\",\n    \"email\": \"aaaaa@pluto.it\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -212,19 +212,30 @@
 					"response": []
 				},
 				{
+					"name": "customers - 204",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{baseUrl}}/{{prefix}}/customers/1",
+							"protocol": "http",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{prefix}}",
+								"customers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "customers - 404",
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"firstName\": \"pippo1\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "http://{{baseUrl}}/{{prefix}}/customers/10",
 							"protocol": "http",
@@ -311,7 +322,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"accountNumber\": \"pippo1\",\n    \"accountType\": \"pippo2\",\n    \"branchAddress\": \"dsad\"\n}",
+							"raw": "{\n    \"accountNumber\": \"pippo1\",\n    \"accountType\": \"dddd\",\n    \"branchAddress\": \"dsad\",\n    \"firstName\": \"aaaa\",\n    \"lastName\": \"bbbb\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -327,6 +338,35 @@
 							"path": [
 								"{{prefix}}",
 								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "accounts - 201 Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"accountNumber\": \"pippo1\",\n    \"accountType\": \"dddd\",\n    \"branchAddress\": \"dsad\",\n    \"firstName\": \"aaaa\",\n    \"lastName\": \"bbbb\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{baseUrl}}/{{prefix}}/accounts/create",
+							"protocol": "http",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{prefix}}",
+								"accounts",
+								"create"
 							]
 						}
 					},
@@ -367,7 +407,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"firstName\": \"pippo1\",\n    \"lastName\": \"pippo2\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
+							"raw": "{\n    \"accountNumber\": \"aaa\",\n    \"accountType\": \"bbb\",\n    \"branchAddress\": \"cccc\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
