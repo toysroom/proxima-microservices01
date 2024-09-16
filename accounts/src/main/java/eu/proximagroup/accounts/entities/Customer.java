@@ -31,12 +31,12 @@ public class Customer extends BaseEntity {
     @NotEmpty(message = "last_name is required")
 	private String lastName;
 
-	@Column(name = "email")
+	@Column(name = "email", unique = true)
     @NotEmpty(message = "email is required")
 	@Email(message = "email is not correct")
 	private String email;
 
-	@Column(name = "mobile_number")
+	@Column(name = "mobile_number", unique = true)
     @NotEmpty(message = "mobile_number is required")
 	private String mobileNumber;
 	

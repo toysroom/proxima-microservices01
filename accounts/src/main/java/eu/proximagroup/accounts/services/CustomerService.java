@@ -38,5 +38,10 @@ public class CustomerService {
 	public void deleteById(Long id) {
 		this.customerRepository.deleteById(id);
 	}
+	
+	public Optional<Customer> getByEmailOrMobileNumber(String email, String mobileNumber)
+	{
+		return this.customerRepository.findByEmailOrMobileNumber(email, mobileNumber);
+	}
 
 }

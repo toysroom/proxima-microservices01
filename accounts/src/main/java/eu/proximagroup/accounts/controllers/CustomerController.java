@@ -117,6 +117,21 @@ public class CustomerController {
             );
         }
 		
+        // Verifica se l'email o il telefono esistono già nel database
+        Optional<Customer> existingCustomer = customerService.getByEmailOrMobileNumber(customer.getEmail(), customer.getMobileNumber());
+        if (existingCustomer.isPresent())
+        {
+        	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+            	new ResponseErrorDto<String>(
+            		request.getRequestURI(),
+            		request.getMethod(),
+            		HttpStatus.BAD_REQUEST,
+            		CustomerConstants.MESSAGE_ALREADY_EMAIL_OR_PHONE
+            	)
+            );
+        }
+		
+		
 		Customer customerInserted = this.customerService.store(customer);
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(
