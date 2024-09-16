@@ -1,5 +1,6 @@
 package eu.proximagroup.accounts.mappers;
 
+import eu.proximagroup.accounts.dto.AccountCustomerRequestDto;
 import eu.proximagroup.accounts.dto.AccountRequestDto;
 import eu.proximagroup.accounts.dto.AccountResponseDto;
 import eu.proximagroup.accounts.entities.Account;
@@ -13,6 +14,16 @@ public class AccountMapper {
 		account.setAccountNumber(accountRequestDto.getAccountNumber());
 		account.setAccountType(accountRequestDto.getAccountType());
 		account.setBranchAddress(accountRequestDto.getBranchAddress());
+		account.setCustomer(customer);
+		return account;
+	}
+	
+	public static Account toEntity(AccountCustomerRequestDto accountCustomerRequestDto, Customer customer)
+	{
+		Account account = new Account();
+		account.setAccountNumber(accountCustomerRequestDto.getAccountNumber());
+		account.setAccountType(accountCustomerRequestDto.getAccountType());
+		account.setBranchAddress(accountCustomerRequestDto.getBranchAddress());
 		account.setCustomer(customer);
 		return account;
 	}
