@@ -63,8 +63,15 @@ public class CustomerController {
 	{
 				
 		// Validazione che l'ID sia un numero valido
-        if (!pathId.matches("\\d+")) {
-            return ResponseEntity.badRequest().body("Invalid ID: must be a numeric value.");
+		if (!pathId.matches("\\d+")) {
+            return ResponseEntity.badRequest().body(
+        		new ResponseErrorDto<String>(
+            		request.getRequestURI(),
+            		request.getMethod(),
+            		HttpStatus.BAD_REQUEST,
+            		CustomerConstants.ERROR_ID_NUMERIC
+            	)	
+            );
         }
 		
         // Convertiamo l'ID in un Long
@@ -84,7 +91,14 @@ public class CustomerController {
             );
 		}
 		
-		return ResponseEntity.ok(customerOptional.get());
+		return ResponseEntity.status(HttpStatus.OK).body(
+			new ResponseSuccessDto<Customer>(
+				HttpStatus.OK,
+				CustomerConstants.MESSAGE_200,
+				customerOptional.get()
+			)
+		);
+		
 	}
 	
 	@PostMapping
@@ -114,9 +128,24 @@ public class CustomerController {
 		);
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody Customer customer, BindingResult result, HttpServletRequest request)
+	@PutMapping("/{pathId}")
+	public ResponseEntity<?> update(@PathVariable String pathId, @Valid @RequestBody Customer customer, BindingResult result, HttpServletRequest request)
 	{
+		// Validazione che l'ID sia un numero valido
+		if (!pathId.matches("\\d+")) {
+            return ResponseEntity.badRequest().body(
+        		new ResponseErrorDto<String>(
+            		request.getRequestURI(),
+            		request.getMethod(),
+            		HttpStatus.BAD_REQUEST,
+            		CustomerConstants.ERROR_ID_NUMERIC
+            	)	
+            );
+        }
+		
+        // Convertiamo l'ID in un Long
+        Long id = Long.parseLong(pathId);
+		
 		if (result.hasErrors()) {
             List<String> errorMessages = new ArrayList<>();
             result.getAllErrors().forEach(error -> errorMessages.add(error.getDefaultMessage()));
@@ -149,14 +178,34 @@ public class CustomerController {
 		
 		Optional<Customer> customerUpdated = this.customerService.getById(id);
 
-		return ResponseEntity.status(HttpStatus.OK).body(customerUpdated.get());
+		return ResponseEntity.status(HttpStatus.OK).body(
+			new ResponseSuccessDto<Customer>(
+				HttpStatus.CREATED,
+				CustomerConstants.MESSAGE_201,
+				customerUpdated.get()
+			)
+		);
 	}
 	
 	
-	@PatchMapping("/{id}")
-	public ResponseEntity<?> updateCustomerFields(@PathVariable Long id, @Valid @RequestBody Map<String, String> updateFields, HttpServletRequest request)
+	@PatchMapping("/{pathId}")
+	public ResponseEntity<?> updateCustomerFields(@PathVariable String pathId, @Valid @RequestBody Map<String, String> updateFields, HttpServletRequest request)
 	{
+		// Validazione che l'ID sia un numero valido
+		if (!pathId.matches("\\d+")) {
+            return ResponseEntity.badRequest().body(
+        		new ResponseErrorDto<String>(
+            		request.getRequestURI(),
+            		request.getMethod(),
+            		HttpStatus.BAD_REQUEST,
+            		CustomerConstants.ERROR_ID_NUMERIC
+            	)	
+            );
+        }
 		
+        // Convertiamo l'ID in un Long
+        Long id = Long.parseLong(pathId);
+        
 		List<String> allowedFields = Arrays.asList("firstName", "email");
 		
 		// Verifica che i campi ricevuti siano validi
@@ -203,12 +252,33 @@ public class CustomerController {
 		
 		Optional<Customer> customerUpdated = this.customerService.getById(id);
 
-		return ResponseEntity.status(HttpStatus.OK).body(customerUpdated.get());
+		return ResponseEntity.status(HttpStatus.OK).body(
+			new ResponseSuccessDto<Customer>(
+				HttpStatus.OK,
+				CustomerConstants.MESSAGE_200,
+				customerUpdated.get()
+			)
+		);
 	}
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> destroy(@PathVariable Long id, HttpServletRequest request)
+	@DeleteMapping("/{pathId}")
+	public ResponseEntity<?> destroy(@PathVariable String pathId, HttpServletRequest request)
 	{
+		// Validazione che l'ID sia un numero valido
+        if (!pathId.matches("\\d+")) {
+            return ResponseEntity.badRequest().body(
+        		new ResponseErrorDto<String>(
+            		request.getRequestURI(),
+            		request.getMethod(),
+            		HttpStatus.BAD_REQUEST,
+            		CustomerConstants.ERROR_ID_NUMERIC
+            	)	
+            );
+        }
+		
+        // Convertiamo l'ID in un Long
+        Long id = Long.parseLong(pathId);
+        
 		Optional<Customer> customerOptional = this.customerService.getById(id);
 		if (customerOptional.isEmpty())
 		{
@@ -224,11 +294,11 @@ public class CustomerController {
 
 		this.customerService.deleteById(id);
 		
-		return ResponseEntity.status(HttpStatus.NO_CONTENT).body(
+		return ResponseEntity.status(HttpStatus.OK).body(
 			new ResponseSuccessDto<String>(
 				HttpStatus.NO_CONTENT,
 				CustomerConstants.MESSAGE_204,
-				""
+				null
 			)
 		);
 	}
