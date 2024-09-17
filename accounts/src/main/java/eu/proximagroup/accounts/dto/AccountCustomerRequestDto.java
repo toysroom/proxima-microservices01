@@ -9,7 +9,7 @@ import lombok.Setter;
 public class AccountCustomerRequestDto {
 
 	@NotEmpty(message = "account_number is required")
-	private String accountNumber;
+	private Long accountNumber;
 	
     @NotEmpty(message = "account_type is required")
     private String accountType;

@@ -1,5 +1,7 @@
 package eu.proximagroup.accounts.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,9 +14,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
-@Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
+@Getter @Setter  @AllArgsConstructor @NoArgsConstructor
 @Entity
 @Table(name = "accounts")
 public class Account extends BaseEntity {
@@ -24,7 +25,7 @@ public class Account extends BaseEntity {
     private Long id;
 	
     @Column
-    private String accountNumber;
+    private Long accountNumber;
 
     @Column
     private String accountType;
@@ -33,6 +34,7 @@ public class Account extends BaseEntity {
     private String branchAddress;
     
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(nullable = false)
     private Customer customer;
 }

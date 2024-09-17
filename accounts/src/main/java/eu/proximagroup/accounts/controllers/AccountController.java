@@ -1,7 +1,9 @@
 package eu.proximagroup.accounts.controllers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -207,7 +210,75 @@ public class AccountController {
 	}
 	
 	
-	
+	@PatchMapping("/{pathId}")
+	public ResponseEntity<?> updateFields(@PathVariable String pathId, @Valid @RequestBody Map<String, String> updateFields, HttpServletRequest request)
+	{
+		// Validazione che l'ID sia un numero valido
+		if (!pathId.matches("\\d+")) {
+            return ResponseEntity.badRequest().body(
+        		new ResponseErrorDto<String>(
+            		request.getRequestURI(),
+            		request.getMethod(),
+            		HttpStatus.BAD_REQUEST,
+            		CustomerConstants.ERROR_ID_NUMERIC
+            	)	
+            );
+        }
+		
+        // Convertiamo l'ID in un Long
+        Long id = Long.parseLong(pathId);
+        
+		List<String> allowedFields = Arrays.asList("accountType");
+		
+		// Verifica che i campi ricevuti siano validi
+        for (String field : updateFields.keySet()) {
+            if (!allowedFields.contains(field)) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+            		new ResponseErrorDto<String>(
+                		request.getRequestURI(),
+                		request.getMethod(),
+                		HttpStatus.BAD_REQUEST,
+                		"Field " + field + " not allowed"
+                	)
+                );
+            }
+        }
+		
+		Optional<Account> accountOptional = this.accountService.getById(id);
+		
+		if (accountOptional.isEmpty())
+		{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+            	new ResponseErrorDto<String>(
+            		request.getRequestURI(),
+            		request.getMethod(),
+            		HttpStatus.NOT_FOUND,
+            		CustomerConstants.MESSAGE_404
+            	)
+            );
+		}
+		
+		if (updateFields.containsKey("accountType"))
+		{
+			accountOptional.get().setAccountType(updateFields.get("accountType"));
+		}
+		
+		
+				
+		this.accountService.update(accountOptional.get(), id);
+		
+		this.entityManager.clear();
+		
+		Optional<Account> accountUpdated = this.accountService.getById(id);
+
+		return ResponseEntity.status(HttpStatus.OK).body(
+			new ResponseSuccessDto<Account>(
+				HttpStatus.OK,
+				CustomerConstants.MESSAGE_200,
+				accountUpdated.get()
+			)
+		);
+	}
 	
 	@DeleteMapping("/{pathId}")
 	public ResponseEntity<?> destroy(@PathVariable String pathId, HttpServletRequest request)

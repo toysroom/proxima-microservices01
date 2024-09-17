@@ -8,8 +8,8 @@ import lombok.Setter;
 @Getter @Setter
 public class AccountRequestDto {
 
-    @NotEmpty(message = "account_number is required")
-	private String accountNumber;
+	@NotNull(message = "account_number is required")
+	private Long accountNumber;
 	
     @NotEmpty(message = "account_type is required")
     private String accountType;

@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter @Setter
 public class AccountResponseDto {
 	private Long id;
-	private String accountNumber;
+	private Long accountNumber;
 	private String accountType;
 	private String branchAddress;
 	private CustomerResponseDto customer;
