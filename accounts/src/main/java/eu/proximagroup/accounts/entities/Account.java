@@ -14,8 +14,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
-@Getter @Setter  @AllArgsConstructor @NoArgsConstructor
+@Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
 @Entity
 @Table(name = "accounts")
 public class Account extends BaseEntity {

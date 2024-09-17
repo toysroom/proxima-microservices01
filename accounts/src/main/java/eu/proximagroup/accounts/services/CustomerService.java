@@ -21,6 +21,10 @@ public class CustomerService {
 	public List<Customer> getAll() {
 		return this.customerRepository.findAll();
 	}
+	
+	public List<Customer> getBySex(String sex) {
+		return this.customerRepository.findBySex(sex);
+	}
 
 	public Optional<Customer> getById(Long id) {
 		return this.customerRepository.findById(id);

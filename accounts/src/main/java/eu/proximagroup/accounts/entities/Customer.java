@@ -10,6 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -19,8 +21,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
 @Entity
 @Table(name = "customers")
 public class Customer extends BaseEntity {
@@ -50,7 +53,16 @@ public class Customer extends BaseEntity {
 	@Pattern(regexp = "^(\\\\+|[0]{2})[0-9]{11,14}$", message = "mobile_number must have internationla prefix")
 	private String mobileNumber;
 	
+	@NotEmpty(message = "sex is required")
+	private String sex;
+	
 	@JsonManagedReference
 	@OneToMany(mappedBy="customer")
 	private List<Account> accounts;
+	
+	@PrePersist
+    @PreUpdate
+    public void onPrePersit() {
+        this.setEmail(this.getEmail().toLowerCase());
+    }
 }

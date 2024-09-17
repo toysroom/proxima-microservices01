@@ -46,9 +46,17 @@ public class CustomerController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<ResponseSuccessDto<List<Customer>>> index()
+	public ResponseEntity<ResponseSuccessDto<List<Customer>>> index(@RequestParam(defaultValue = "") String sex)
 	{
-		List<Customer> customers = this.customerService.getAll();
+		List<Customer> customers = null;
+		if (sex.equals("M") || sex.equals("F"))
+		{
+			customers = this.customerService.getBySex(sex);						
+		}
+		else 
+		{
+			customers = this.customerService.getAll();			
+		}
 
 		return ResponseEntity.status(HttpStatus.OK).body(
 			new ResponseSuccessDto<List<Customer>>(
