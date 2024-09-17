@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import eu.proximagroup.accounts.entities.Customer;
+import eu.proximagroup.accounts.exceptions.ResourceNotFoundException;
 import eu.proximagroup.accounts.repositories.CustomerRepository;
 
 @Service
@@ -26,8 +27,12 @@ public class CustomerService {
 		return this.customerRepository.findBySex(sex);
 	}
 
-	public Optional<Customer> getById(Long id) {
-		return this.customerRepository.findById(id);
+	public Customer getById(Long id) {
+		
+		Customer customer = this.customerRepository.findById(id)
+				.orElseThrow( () -> new ResourceNotFoundException("Customer", "id", id.toString()) );
+		
+		return customer;
 	}
 
 	public Customer store(Customer customer) {
@@ -40,6 +45,10 @@ public class CustomerService {
 	}
 
 	public void deleteById(Long id) {
+		
+		this.customerRepository.findById(id)
+				.orElseThrow( () -> new ResourceNotFoundException("Customer", "id", id.toString()) );
+		
 		this.customerRepository.deleteById(id);
 	}
 	

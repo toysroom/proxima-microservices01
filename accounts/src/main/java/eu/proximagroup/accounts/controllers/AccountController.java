@@ -128,21 +128,11 @@ public class AccountController {
         }
 		
 		// verifico se esiste customer
-		Optional<Customer> optionalCustomer = this.customerService.getById(accountRequestDto.getCustomerId());
-		if (optionalCustomer.isEmpty())
-		{
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-        		new ResponseErrorDto<String>(
-            		request.getRequestURI(),
-            		request.getMethod(),
-            		HttpStatus.NOT_FOUND,
-            		AccountConstants.MESSAGE_404
-            	)		
-            );
-		}
+		Customer optionalCustomer = this.customerService.getById(accountRequestDto.getCustomerId());
 		
 		
-		Account account = AccountMapper.toEntity(accountRequestDto, optionalCustomer.get());
+		
+		Account account = AccountMapper.toEntity(accountRequestDto, optionalCustomer);
 		
 		Account accountInserted = this.accountService.store(account);
 		
@@ -253,7 +243,7 @@ public class AccountController {
             		request.getRequestURI(),
             		request.getMethod(),
             		HttpStatus.NOT_FOUND,
-            		CustomerConstants.MESSAGE_404
+            		AccountConstants.MESSAGE_404
             	)
             );
 		}

@@ -87,24 +87,14 @@ public class CustomerController {
         Long id = Long.parseLong(pathId);
 		
 		
-		Optional<Customer> customerOptional = this.customerService.getById(id);
-		if (customerOptional.isEmpty())
-		{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-            	new ResponseErrorDto<String>(
-            		request.getRequestURI(),
-            		request.getMethod(),
-            		HttpStatus.NOT_FOUND,
-            		CustomerConstants.MESSAGE_404
-            	)
-            );
-		}
+		Customer customerOptional = this.customerService.getById(id);
+
 		
 		return ResponseEntity.status(HttpStatus.OK).body(
 			new ResponseSuccessDto<Customer>(
 				HttpStatus.OK,
 				CustomerConstants.MESSAGE_200,
-				customerOptional.get()
+				customerOptional
 			)
 		);
 		
@@ -139,7 +129,6 @@ public class CustomerController {
             	)
             );
         }
-		
 		
 		Customer customerInserted = this.customerService.store(customer);
 		
@@ -183,34 +172,23 @@ public class CustomerController {
             );
         }
 		
-		Optional<Customer> customerOptional = this.customerService.getById(id);
-		if (customerOptional.isEmpty())
-		{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-            	new ResponseErrorDto<String>(
-            		request.getRequestURI(),
-            		request.getMethod(),
-            		HttpStatus.NOT_FOUND,
-            		CustomerConstants.MESSAGE_404
-            	)
-            );
-		}
+		this.customerService.getById(id);
+
 				
 		this.customerService.update(customer, id);
 		
 		this.entityManager.clear();
 		
-		Optional<Customer> customerUpdated = this.customerService.getById(id);
+		Customer customerUpdated = this.customerService.getById(id);
 
 		return ResponseEntity.status(HttpStatus.OK).body(
 			new ResponseSuccessDto<Customer>(
 				HttpStatus.CREATED,
 				CustomerConstants.MESSAGE_201,
-				customerUpdated.get()
+				customerUpdated
 			)
 		);
 	}
-	
 	
 	@PatchMapping("/{pathId}")
 	public ResponseEntity<?> updateCustomerFields(@PathVariable String pathId, @Valid @RequestBody Map<String, String> updateFields, HttpServletRequest request)
@@ -246,41 +224,30 @@ public class CustomerController {
             }
         }
 		
-		Optional<Customer> customerOptional = this.customerService.getById(id);
+		Customer customerOptional = this.customerService.getById(id);
 		
-		if (customerOptional.isEmpty())
-		{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-            	new ResponseErrorDto<String>(
-            		request.getRequestURI(),
-            		request.getMethod(),
-            		HttpStatus.NOT_FOUND,
-            		CustomerConstants.MESSAGE_404
-            	)
-            );
-		}
 		
 		if (updateFields.containsKey("firstName"))
 		{
-			customerOptional.get().setFirstName(updateFields.get("firstName"));
+			customerOptional.setFirstName(updateFields.get("firstName"));
 		}
 		
 		if (updateFields.containsKey("email"))
 		{
-			customerOptional.get().setEmail(updateFields.get("email"));
+			customerOptional.setEmail(updateFields.get("email"));
 		}
 				
-		this.customerService.update(customerOptional.get(), id);
+		this.customerService.update(customerOptional, id);
 		
 		this.entityManager.clear();
 		
-		Optional<Customer> customerUpdated = this.customerService.getById(id);
+		Customer customerUpdated = this.customerService.getById(id);
 
 		return ResponseEntity.status(HttpStatus.OK).body(
 			new ResponseSuccessDto<Customer>(
 				HttpStatus.OK,
 				CustomerConstants.MESSAGE_200,
-				customerUpdated.get()
+				customerUpdated
 			)
 		);
 	}
@@ -303,19 +270,6 @@ public class CustomerController {
         // Convertiamo l'ID in un Long
         Long id = Long.parseLong(pathId);
         
-		Optional<Customer> customerOptional = this.customerService.getById(id);
-		if (customerOptional.isEmpty())
-		{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-            	new ResponseErrorDto<String>(
-            		request.getRequestURI(),
-            		request.getMethod(),
-            		HttpStatus.NOT_FOUND,
-            		CustomerConstants.MESSAGE_404
-            	)
-            );
-		}
-
 		this.customerService.deleteById(id);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(
