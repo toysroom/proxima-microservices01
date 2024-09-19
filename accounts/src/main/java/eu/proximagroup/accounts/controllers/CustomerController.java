@@ -24,6 +24,8 @@ import eu.proximagroup.accounts.constants.CustomerConstants;
 import eu.proximagroup.accounts.dto.ResponseErrorDto;
 import eu.proximagroup.accounts.dto.ResponseSuccessDto;
 import eu.proximagroup.accounts.entities.Customer;
+import eu.proximagroup.accounts.exceptions.InvalidIdFormatIDException;
+import eu.proximagroup.accounts.exceptions.ResourceNotFoundException;
 import eu.proximagroup.accounts.services.CustomerService;
 import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
@@ -73,23 +75,14 @@ public class CustomerController {
 				
 		// Validazione che l'ID sia un numero valido
 		if (!pathId.matches("\\d+")) {
-            return ResponseEntity.badRequest().body(
-        		new ResponseErrorDto<String>(
-            		request.getRequestURI(),
-            		request.getMethod(),
-            		HttpStatus.BAD_REQUEST,
-            		CustomerConstants.ERROR_ID_NUMERIC
-            	)	
-            );
+			throw new InvalidIdFormatIDException(CustomerConstants.ERROR_ID_NUMERIC);	
         }
 		
         // Convertiamo l'ID in un Long
         Long id = Long.parseLong(pathId);
 		
-		
 		Customer customerOptional = this.customerService.getById(id);
 
-		
 		return ResponseEntity.status(HttpStatus.OK).body(
 			new ResponseSuccessDto<Customer>(
 				HttpStatus.OK,
@@ -189,6 +182,7 @@ public class CustomerController {
 			)
 		);
 	}
+	
 	
 	@PatchMapping("/{pathId}")
 	public ResponseEntity<?> updateCustomerFields(@PathVariable String pathId, @Valid @RequestBody Map<String, String> updateFields, HttpServletRequest request)
