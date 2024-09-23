@@ -1,35 +1,23 @@
 services:
   accounts:
-    image: "microservices-01/accounts:latest"
+    image: "microservices-01/accounts:v1"
     container_name: accounts
     ports:
       - "8080:8080"
-    deploy:
-      resources:
-        limits:
-          memory: 700m
     networks:
       - proximagroup
   loans:
-    image: "microservices-01/loans:latest"
+    image: "microservices-01/loans:v1"
     container_name: loans
     ports:
       - "8090:8090"
-    deploy:
-      resources:
-        limits:
-          memory: 700m
     networks:
       - proximagroup
   cards:
-    image: "microservices-01/cards:latest"
+    image: "microservices-01/cards:v1"
     container_name: cards
     ports:
       - "9000:9000"
-    deploy:
-      resources:
-        limits:
-          memory: 700m
     networks:
       - proximagroup
 networks:
