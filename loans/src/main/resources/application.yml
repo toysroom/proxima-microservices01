@@ -13,5 +13,5 @@ spring:
     ddl-auto: update
   defer-datasource-initialization: true
   show-sql: true
-build:
-  version: 1.0
+ config:
+  import: "configserver:http://localhost:8071/"  
