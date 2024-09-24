@@ -19,7 +19,6 @@ public class InfoController {
 	@Value("${build.version}")
 	private String buildVersion;
 	
-	
 	@GetMapping("/test")
     public ResponseEntity<String> test() {
         return ResponseEntity
@@ -43,4 +42,13 @@ public class InfoController {
 			.status(HttpStatus.OK)
 			.body(ambiente);
 	}
+	
+	@GetMapping("/credentials")
+    public String getJavaInfo() {
+		String username = environment.getProperty("username");
+		String password = environment.getProperty("password");
+
+        return String.format("Username: %s, Password: %s", 
+        		username, password);
+    }
 }
