@@ -7,245 +7,609 @@
 	},
 	"item": [
 		{
-			"name": "customers",
+			"name": "accounts",
 			"item": [
 				{
+					"name": "accounts",
+					"item": [
+						{
+							"name": "accounts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/accounts",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"accounts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "accounts/{id} - 200",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/accounts/1",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"accounts",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "accounts/{id} - 404",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/accounts/20",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"accounts",
+										"20"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "accounts - 201",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"accountNumber\": \"pippo1\",\n    \"accountType\": \"dddd\",\n    \"branchAddress\": \"dsad\",\n    \"firstName\": \"aaaa\",\n    \"lastName\": \"bbbb\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/accounts",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"accounts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "accounts - 201 Copy",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"accountNumber\": \"pippo1\",\n    \"accountType\": \"dddd\",\n    \"branchAddress\": \"dsad\",\n    \"firstName\": \"aaaa\",\n    \"lastName\": \"bbbb\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/accounts/create",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"accounts",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "accounts - 400",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"pippo1\",\n    \"email\": \"PIPPO.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/accounts",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"accounts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "accounts - 200",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"accountNumber\": \"aaa\",\n    \"accountType\": \"bbb\",\n    \"branchAddress\": \"cccc\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/accounts/1",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"accounts",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "accounts - 400",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"pippo1\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/accounts/1",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"accounts",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "accounts - 204",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"pippo1\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/accounts/1",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"accounts",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "accounts - 404",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"pippo1\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/accounts/10",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"accounts",
+										"10"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "customers",
+					"item": [
+						{
+							"name": "customers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/customers",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"customers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "customers/{id} - 200",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/customers/55555",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"customers",
+										"55555"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "customers/{id} - 404",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/customers/20",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"customers",
+										"20"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "customers - 201",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"aaasdasd\",\n    \"lastName\": \"bbbb\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"00393493203060\",\n    \"sex\": \"M\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/customers",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"customers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "customers - 400",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"pippo1\",\n    \"email\": \"PIPPO.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/customers",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"customers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "customers - 200",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"cccc\",\n    \"lastName\": \"ddddddd\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/customers/2",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"customers",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "customers - 400",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"pippo1\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/customers/1",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"customers",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "customers/email - 200",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstNam\": \"pippo\",\n    \"email\": \"aaaaa@pluto.it\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/customers/1",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"customers",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "customers - 204",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/customers/1",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"customers",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "customers - 404",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/customers/10",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"customers",
+										"10"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "env",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/customers",
+							"raw": "http://{{baseUrl}}/{{prefix}}/env",
 							"protocol": "http",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"{{prefix}}",
-								"customers"
+								"env"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "customers/{id} - 200",
+					"name": "credentials",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/customers/55555",
+							"raw": "http://{{baseUrl}}/{{prefix}}/credentials",
 							"protocol": "http",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"{{prefix}}",
-								"customers",
-								"55555"
+								"credentials"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "customers/{id} - 404",
+					"name": "actuator",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/customers/20",
+							"raw": "http://{{baseUrl}}/actuator",
 							"protocol": "http",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"{{prefix}}",
-								"customers",
-								"20"
+								"actuator"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "customers - 201",
+					"name": "actuator/refresh",
 					"request": {
 						"method": "POST",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"firstName\": \"aaaa\",\n    \"lastName\": \"bbbb\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/customers",
+							"raw": "http://{{baseUrl}}/actuator/refresh",
 							"protocol": "http",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"{{prefix}}",
-								"customers"
+								"actuator",
+								"refresh"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "customers - 400",
+					"name": "actuator/busrefresh",
 					"request": {
 						"method": "POST",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"firstName\": \"pippo1\",\n    \"email\": \"PIPPO.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/customers",
+							"raw": "http://{{baseUrl}}/actuator/busrefresh",
 							"protocol": "http",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"{{prefix}}",
-								"customers"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "customers - 200",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"firstName\": \"cccc\",\n    \"lastName\": \"ddddddd\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/customers/2",
-							"protocol": "http",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"{{prefix}}",
-								"customers",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "customers - 400",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"firstName\": \"pippo1\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/customers/1",
-							"protocol": "http",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"{{prefix}}",
-								"customers",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "customers/email - 200",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"firstNam\": \"pippo\",\n    \"email\": \"aaaaa@pluto.it\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/customers/1",
-							"protocol": "http",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"{{prefix}}",
-								"customers",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "customers - 204",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/customers/1",
-							"protocol": "http",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"{{prefix}}",
-								"customers",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "customers - 404",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/customers/10",
-							"protocol": "http",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"{{prefix}}",
-								"customers",
-								"10"
+								"actuator",
+								"busrefresh"
 							]
 						}
 					},
@@ -254,263 +618,376 @@
 			]
 		},
 		{
-			"name": "accounts",
+			"name": "cards",
+			"item": [
+				{
+					"name": "env",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{baseUrl}}/{{prefix}}/env",
+							"protocol": "http",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{prefix}}",
+								"env"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actuator",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{baseUrl}}/actuator",
+							"protocol": "http",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"actuator"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actuator/refresh",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://{{baseUrl}}/actuator/refresh",
+							"protocol": "http",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"actuator",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "loans",
+			"item": [
+				{
+					"name": "env",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{baseUrl}}/{{prefix}}/env",
+							"protocol": "http",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{prefix}}",
+								"env"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actuator",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{baseUrl}}/actuator",
+							"protocol": "http",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"actuator"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actuator/refresh",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://{{baseUrl}}/actuator/refresh",
+							"protocol": "http",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"actuator",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "configserver",
 			"item": [
 				{
 					"name": "accounts",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/accounts",
-							"protocol": "http",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"{{prefix}}",
-								"accounts"
-							]
+					"item": [
+						{
+							"name": "accounts/default",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8071/accounts/default",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8071",
+									"path": [
+										"accounts",
+										"default"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "accounts/qa",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8071/accounts/qa",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8071",
+									"path": [
+										"accounts",
+										"qa"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "accounts/prod",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8071/accounts/prod",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8071",
+									"path": [
+										"accounts",
+										"prod"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "accounts/{id} - 200",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/accounts/1",
-							"protocol": "http",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"{{prefix}}",
-								"accounts",
-								"1"
-							]
+					"name": "cards",
+					"item": [
+						{
+							"name": "cards/default",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8071/cards/default",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8071",
+									"path": [
+										"cards",
+										"default"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cards/qa",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8071/cards/qa",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8071",
+									"path": [
+										"cards",
+										"qa"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cards/prod",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8071/cards/prod",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8071",
+									"path": [
+										"cards",
+										"prod"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "accounts/{id} - 404",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/accounts/20",
-							"protocol": "http",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"{{prefix}}",
-								"accounts",
-								"20"
-							]
+					"name": "loans",
+					"item": [
+						{
+							"name": "loans/default",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8071/loans/default",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8071",
+									"path": [
+										"loans",
+										"default"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "loans/qa",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8071/loans/qa",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8071",
+									"path": [
+										"loans",
+										"qa"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "loans/prod",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8071/accounts/prod",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8071",
+									"path": [
+										"accounts",
+										"prod"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "accounts - 201",
+					"name": "encrypt",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"accountNumber\": \"pippo1\",\n    \"accountType\": \"dddd\",\n    \"branchAddress\": \"dsad\",\n    \"firstName\": \"aaaa\",\n    \"lastName\": \"bbbb\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
+							"raw": "abcd",
 							"options": {
 								"raw": {
-									"language": "json"
+									"language": "text"
 								}
 							}
 						},
 						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/accounts",
+							"raw": "http://localhost:8071/encrypt",
 							"protocol": "http",
 							"host": [
-								"{{baseUrl}}"
+								"localhost"
 							],
+							"port": "8071",
 							"path": [
-								"{{prefix}}",
-								"accounts"
+								"encrypt"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "accounts - 201 Copy",
+					"name": "deecrypt",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"accountNumber\": \"pippo1\",\n    \"accountType\": \"dddd\",\n    \"branchAddress\": \"dsad\",\n    \"firstName\": \"aaaa\",\n    \"lastName\": \"bbbb\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
+							"raw": "f5c983bce738f427bf87ca820a3d079b988a033eec229b6e96cfb30fbdb8114794afc45e6fd3bff3e2d25a4b59631a26",
 							"options": {
 								"raw": {
-									"language": "json"
+									"language": "text"
 								}
 							}
 						},
 						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/accounts/create",
+							"raw": "http://localhost:8071/decrypt",
 							"protocol": "http",
 							"host": [
-								"{{baseUrl}}"
+								"localhost"
 							],
+							"port": "8071",
 							"path": [
-								"{{prefix}}",
-								"accounts",
-								"create"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "accounts - 400",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"firstName\": \"pippo1\",\n    \"email\": \"PIPPO.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/accounts",
-							"protocol": "http",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"{{prefix}}",
-								"accounts"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "accounts - 200",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"accountNumber\": \"aaa\",\n    \"accountType\": \"bbb\",\n    \"branchAddress\": \"cccc\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/accounts/1",
-							"protocol": "http",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"{{prefix}}",
-								"accounts",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "accounts - 400",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"firstName\": \"pippo1\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/accounts/1",
-							"protocol": "http",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"{{prefix}}",
-								"accounts",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "accounts - 204",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"firstName\": \"pippo1\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/accounts/1",
-							"protocol": "http",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"{{prefix}}",
-								"accounts",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "accounts - 404",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"firstName\": \"pippo1\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://{{baseUrl}}/{{prefix}}/accounts/10",
-							"protocol": "http",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"{{prefix}}",
-								"accounts",
-								"10"
+								"decrypt"
 							]
 						}
 					},
