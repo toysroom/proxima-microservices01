@@ -1,0 +1,93 @@
+networks:
+  proximagroup:
+    name: "proximagroup"
+    driver: "bridge"
+services:
+  rabbit:
+    image: rabbitmq:3.13-management
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: rabbitmq-diagnostics check_port_connectivity
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+    networks:
+      - proximagroup
+
+  configserver:
+    image: "configserver:v1"
+    build:
+     context: ../../configserver
+    container_name: configserver
+    ports:
+     - "8071:8071"
+    networks:
+     - proximagroup
+    depends_on:
+     rabbit:
+      condition: service_healthy
+    healthcheck:
+       test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
+       interval: 10s
+       timeout: 5s
+       retries: 10
+       start_period: 10s
+    environment:
+     SPRING_RABBITMQ_HOST: "rabbit"
+  accounts:
+     image: "accounts:v1"
+     build:
+      context: ../../accounts
+     container_name: accounts
+     ports:
+       - "8080:8080"
+     networks:
+       - proximagroup
+     depends_on:
+       configserver:
+         condition: service_healthy
+     environment:
+       SPRING_APPLICATION_NAME: "accounts"
+       SPRING_PROFILES_ACTIVE: "default"
+       SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+       SPRING_RABBITMQ_HOST: "rabbit"
+  cards:
+        build:
+          context: ../../cards
+        image: "cards:v1"
+        container_name: cards
+        ports:
+          - "9000:9000"
+        networks:
+          - proximagroup
+        depends_on:
+          configserver:
+            condition: service_healthy
+        environment:
+          SPRING_APPLICATION_NAME: "cards"
+          SPRING_PROFILES_ACTIVE: "default"
+          SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+          SPRING_RABBITMQ_HOST: "rabbit"
+  loans:
+      image: "loans:v1"
+      build:
+       context: ../../loans
+
+      container_name: loans
+      ports:
+        - "8090:8090"
+      networks:
+        - proximagroup
+      depends_on:
+        configserver:
+          condition: service_healthy
+      environment:
+        SPRING_APPLICATION_NAME: "loans"
+        SPRING_PROFILES_ACTIVE: "default"
+        SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+        SPRING_RABBITMQ_HOST: "rabbit"
+
