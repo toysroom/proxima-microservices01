@@ -1,0 +1,10 @@
+services:
+   network-service:
+     networks:
+       - proximagroup
+
+   base-service:
+     extends: 
+        service: network-service
+     environment:
+        SPRING_RABBITMQ_HOST: "rabbit"

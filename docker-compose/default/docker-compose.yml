@@ -15,18 +15,18 @@ services:
       timeout: 5s
       retries: 10
       start_period: 5s
-    networks:
-      - proximagroup
+    extends:
+      file: "common-config.yml"
+      service: "network-service"
 
   configserver:
     image: "configserver:v1"
-    build:
-     context: ../../configserver
     container_name: configserver
     ports:
      - "8071:8071"
-    networks:
-     - proximagroup
+    extends:
+      file: "common-config.yml"
+      service: "base-service"
     depends_on:
      rabbit:
       condition: service_healthy
@@ -36,17 +36,15 @@ services:
        timeout: 5s
        retries: 10
        start_period: 10s
-    environment:
-     SPRING_RABBITMQ_HOST: "rabbit"
+  
   accounts:
      image: "accounts:v1"
-     build:
-      context: ../../accounts
      container_name: accounts
      ports:
        - "8080:8080"
-     networks:
-       - proximagroup
+     extends:
+       file: "common-config.yml"
+       service: "base-service"
      depends_on:
        configserver:
          condition: service_healthy
@@ -54,16 +52,14 @@ services:
        SPRING_APPLICATION_NAME: "accounts"
        SPRING_PROFILES_ACTIVE: "default"
        SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
-       SPRING_RABBITMQ_HOST: "rabbit"
   cards:
-        build:
-          context: ../../cards
         image: "cards:v1"
         container_name: cards
         ports:
           - "9000:9000"
-        networks:
-          - proximagroup
+        extends:
+          file: "common-config.yml"
+          service: "base-service"
         depends_on:
           configserver:
             condition: service_healthy
@@ -71,17 +67,14 @@ services:
           SPRING_APPLICATION_NAME: "cards"
           SPRING_PROFILES_ACTIVE: "default"
           SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
-          SPRING_RABBITMQ_HOST: "rabbit"
   loans:
       image: "loans:v1"
-      build:
-       context: ../../loans
-
       container_name: loans
       ports:
         - "8090:8090"
-      networks:
-        - proximagroup
+      extends:
+        file: "common-config.yml"
+        service: "base-service"
       depends_on:
         configserver:
           condition: service_healthy
@@ -89,5 +82,3 @@ services:
         SPRING_APPLICATION_NAME: "loans"
         SPRING_PROFILES_ACTIVE: "default"
         SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
-        SPRING_RABBITMQ_HOST: "rabbit"
-
