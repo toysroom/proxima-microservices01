@@ -1,21 +1,25 @@
 server:
-    port: 8080
+   port: 8080
 spring: 
-  application:
-    name: accounts
-  datasource:
-    url: jdbc:h2:mem:test
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: ''
-  jpa:
+   application:
+      name: accounts
+   datasource:
+      #url: jdbc:h2:mem:test
+      #driver-class-name: org.h2.Driver
+      #username: sa
+      #password: ''
+      url: jdbc:mysql://localhost:3316/accountsdb
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: root
+   jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: update
-    defer-datasource-initialization: true
     show-sql: true
-  config:
+   config:
     import: "optional:configserver:http://localhost:8071/"  
-  rabbitmq:
+   rabbitmq:
     host: "localhost"
     port: 5672
     username: "guest"
