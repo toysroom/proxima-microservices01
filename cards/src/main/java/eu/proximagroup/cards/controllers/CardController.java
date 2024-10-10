@@ -2,6 +2,7 @@ package eu.proximagroup.cards.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.proximagroup.cards.dtos.ResponseErrorDto;
@@ -44,6 +46,16 @@ public class CardController {
 				);
 	}
 	
+	@GetMapping("/search/params")
+	public ResponseEntity<ArrayList<Card>> search(@RequestParam String mobileNumber)
+	{
+		ArrayList<Card> cards = this.cardService.getByMobileNumber(mobileNumber);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(
+			cards
+		);
+	}
+	
 	@PostMapping
 	public ResponseEntity<?> store(@Valid @RequestBody Card card,BindingResult result, HttpServletRequest request) {
 		if(result.hasErrors()) {
@@ -60,9 +72,9 @@ public class CardController {
 					);
 		}
 		
-		this.cardService.getById(card.getId());
+		// this.cardService.getById(card.getId());
 		
-		Card cardSaved=this.cardService.store(card);
+		Card cardSaved = this.cardService.store(card);
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(
 				new ResponseSuccessDto<Card>(

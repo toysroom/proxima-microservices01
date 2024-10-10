@@ -1,5 +1,6 @@
 package eu.proximagroup.cards.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -44,5 +45,9 @@ public class CardService {
 	public void isPresent(Long id) {
 		this.cardRepository.findById(id)
 			.orElseThrow( () -> new ResourceNotFoundException("Card", "id", id.toString()));
+	}
+	
+	public ArrayList<Card> getByMobileNumber(String mobileNumber) {
+		return this.cardRepository.findByMobileNumber(mobileNumber);
 	}
 }

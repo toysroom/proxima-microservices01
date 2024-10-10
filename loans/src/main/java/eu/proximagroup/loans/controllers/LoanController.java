@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import eu.proximagroup.loans.dtos.ResponseErrorDto;
 import eu.proximagroup.loans.dtos.ResponseSuccessDto;
 import eu.proximagroup.loans.models.Loan;
@@ -44,6 +46,16 @@ public class LoanController {
 				);
 	}
 	
+	@GetMapping("/search/params")
+	public ResponseEntity<ArrayList<Loan>> search(@RequestParam String mobileNumber)
+	{
+		ArrayList<Loan> loans = this.loanService.getByMobileNumber(mobileNumber);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(
+			loans
+		);
+	}
+	
 	@PostMapping
 	public ResponseEntity<?> store(@Valid @RequestBody Loan loan,BindingResult result, HttpServletRequest request) {
 		if(result.hasErrors()) {
@@ -59,9 +71,7 @@ public class LoanController {
 					
 					);
 		}
-		
-		this.loanService.getById(loan.getId());
-		
+				
 		Loan loanSaved=this.loanService.store(loan);
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.proximagroup.accounts.constants.CustomerConstants;
+import eu.proximagroup.accounts.dto.CustomerDetailsDto;
 import eu.proximagroup.accounts.dto.ResponseErrorDto;
 import eu.proximagroup.accounts.dto.ResponseSuccessDto;
 import eu.proximagroup.accounts.entities.Customer;
@@ -68,6 +69,22 @@ public class CustomerController {
 		);
 	}
 	
+	@GetMapping("/search/params")
+	public ResponseEntity<?> search(@RequestParam String mobileNumber)
+	{
+		Customer customer = this.customerService.getByMobileNumber(mobileNumber);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(
+			new ResponseSuccessDto<Customer>(
+				HttpStatus.OK,
+				CustomerConstants.MESSAGE_200,
+				customer
+			)
+		);
+	}
+	
+	
+	
 	@GetMapping("/{pathId}")
 	public ResponseEntity<?> show(@PathVariable String pathId, HttpServletRequest request)
 	{
@@ -80,24 +97,20 @@ public class CustomerController {
         // Convertiamo l'ID in un Long
         Long id = Long.parseLong(pathId);
 		
-		Customer customerOptional = this.customerService.getById(id);
+		Customer customer = this.customerService.getById(id);
 
 		return ResponseEntity.status(HttpStatus.OK).body(
 			new ResponseSuccessDto<Customer>(
 				HttpStatus.OK,
 				CustomerConstants.MESSAGE_200,
-				customerOptional
+				customer
 			)
 		);
 		
 	}
 	
 	
-	@GetMapping("/search")
-	public ResponseEntity<?> search(@RequestParam String mobileNumber)
-	{
-		return null;
-	}
+	
 	
 	
 	@PostMapping
@@ -282,4 +295,15 @@ public class CustomerController {
 		);
 	}
 
+	
+	
+	@GetMapping("/details")
+	public ResponseEntity<CustomerDetailsDto> details(@RequestParam String mobileNumber)
+	{
+		// creare un metodo nel service
+		CustomerDetailsDto customerDetailsDto = this.customerService.fetchCustomerDetails(mobileNumber);
+		
+		// restituire una risposta responseEnyity<CustumerDetailsDto>
+		return ResponseEntity.status(HttpStatus.OK).body(customerDetailsDto);
+	}
 }

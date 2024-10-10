@@ -33,14 +33,14 @@ management:
      env:
         enabled: true
         
-#eureka:
-#   instance:
-#      preferIpAddress: true
-#   client:
-#      fetchRegistry: true
-#      registerWithEureka: true
-#      serviceUrl:
-#         defaultZone: http://localhost:8070/eureka
+eureka:
+   instance:
+      preferIpAddress: true
+   client:
+      fetchRegistry: true
+      registerWithEureka: true
+      serviceUrl:
+         defaultZone: http://localhost:8070/eureka
 info:
    app:
       name: "accounts"
