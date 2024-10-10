@@ -16,9 +16,12 @@ services:
        eurekaserver:
          condition: service_healthy
      environment:
-       SPRING_PROFILES_ACTIVE: "default"
-       SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
-       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eurekaserver:8070/eureka/"
+         SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+         SPRING_DATASOURCE_USERNAME: root
+         SPRING_DATASOURCE_PASSWORD: root
+         SPRING_PROFILES_ACTIVE: "default"
+         SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+         EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eurekaserver:8070/eureka/"
        
    microservice-db:
       extends:
