@@ -25,7 +25,6 @@ import eu.proximagroup.accounts.dto.ResponseErrorDto;
 import eu.proximagroup.accounts.dto.ResponseSuccessDto;
 import eu.proximagroup.accounts.entities.Customer;
 import eu.proximagroup.accounts.exceptions.InvalidIdFormatIDException;
-import eu.proximagroup.accounts.exceptions.ResourceNotFoundException;
 import eu.proximagroup.accounts.services.CustomerService;
 import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
@@ -92,6 +91,14 @@ public class CustomerController {
 		);
 		
 	}
+	
+	
+	@GetMapping("/search")
+	public ResponseEntity<?> search(@RequestParam String mobileNumber)
+	{
+		return null;
+	}
+	
 	
 	@PostMapping
 	public ResponseEntity<?> store(@Valid @RequestBody Customer customer, BindingResult result, HttpServletRequest request)
@@ -274,4 +281,5 @@ public class CustomerController {
 			)
 		);
 	}
+
 }

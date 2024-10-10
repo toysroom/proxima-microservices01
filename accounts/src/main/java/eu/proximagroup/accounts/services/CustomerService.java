@@ -57,4 +57,9 @@ public class CustomerService {
 		return this.customerRepository.findByEmailOrMobileNumber(email, mobileNumber);
 	}
 
+	public Optional<Customer> getByMobileNumber(String mobileNumber)
+	{
+		return this.customerRepository.findByMobileNumber(mobileNumber);
+	}
+	
 }

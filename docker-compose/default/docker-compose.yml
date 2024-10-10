@@ -58,8 +58,10 @@ services:
       service: "network-service"
 
    configserver:
-    image: "configserver:v1"
     container_name: configserver
+    image: "configserver:v1"
+    build:
+         context: "../../configserver/"
     ports:
      - "8071:8071"
     extends:
@@ -74,6 +76,28 @@ services:
        timeout: 5s
        retries: 10
        start_period: 10s
+       
+   eurekaserver:
+      container_name: eurekaserver
+      image: "eurekaserver:v1"        
+      build:
+         context: "../../eurekaserver/"
+      ports:
+         - "8070:8070"
+      extends:
+         file: "common-config.yml"
+         service: "network-service"
+      depends_on:
+         configserver:
+            condition: service_healthy
+      healthcheck:
+         test: "curl --fail --silent localhost:8070/actuator/health/readiness | grep UP || exit 1"
+         interval: 10s
+         timeout: 5s
+         retries: 10
+         start_period: 10s
+      environment:
+         SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
   
    accounts:
       container_name: accounts

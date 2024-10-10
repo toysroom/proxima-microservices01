@@ -4,28 +4,45 @@ spring:
    application:
       name: accounts
    datasource:
-      #url: jdbc:h2:mem:test
-      #driver-class-name: org.h2.Driver
-      #username: sa
-      #password: ''
-      url: jdbc:mysql://localhost:3316/accountsdb
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      username: root
-      password: root
+      url: jdbc:h2:mem:test
+      driver-class-name: org.h2.Driver
+      username: sa
+      password: ''
+#      url: jdbc:mysql://localhost:3316/accountsdb
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      username: root
+#      password: root
    jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
+    #database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: update
     show-sql: true
    config:
-    import: "optional:configserver:http://localhost:8071/"  
-   rabbitmq:
-    host: "localhost"
-    port: 5672
-    username: "guest"
-    password: "guest"
+      import: "optional:configserver:http://localhost:8071/"  
+#   rabbitmq:
+#      host: "localhost"
+#      port: 5672
+#      username: "guest"
+#      password: "guest"
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+  info:
+     env:
+        enabled: true
+        
+#eureka:
+#   instance:
+#      preferIpAddress: true
+#   client:
+#      fetchRegistry: true
+#      registerWithEureka: true
+#      serviceUrl:
+#         defaultZone: http://localhost:8070/eureka
+info:
+   app:
+      name: "accounts"
+      description: "Microservizio che gestisce gli account"
+      version: "1.0.0"

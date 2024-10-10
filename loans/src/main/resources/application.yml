@@ -4,10 +4,10 @@ spring:
    application:
       name: loans
    datasource:
-      #  url: jdbc:h2:mem:test
-      #  driver-class-name: org.h2.Driver
-      #  username: sa
-      #  password: ''
+#        url: jdbc:h2:mem:test
+#        driver-class-name: org.h2.Driver
+#        username: sa
+#        password: ''
       url: jdbc:mysql://localhost:3317/loansdb
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
@@ -16,8 +16,6 @@ spring:
       hibernate:
          ddl-auto: update
       show-sql: true
-      properties:
-         hibernate.dialect: org.hibernate.dialect.MySQLDialect
    config:
       import: "optional:configserver:http://localhost:8071/"  
    rabbitmq:
@@ -30,3 +28,20 @@ management:
     web:
       exposure:
         include: "*"
+  info:
+     env:
+        enabled: true
+        
+eureka:
+   instance:
+      preferIpAddress: true
+   client:
+      fetchRegistry: true
+      registerWithEureka: true
+      serviceUrl:
+         defaultZone: http://localhost:8070/eureka
+info:
+   app:
+      name: "loans"
+      description: "Microservizio che gestisce loans"
+      version: "1.0.0"

@@ -4,16 +4,15 @@ spring:
    application:
       name: cards
    datasource:
-      #url: jdbc:h2:mem:test
-      #driver-class-name: org.h2.Driver
-      #username: sa
-      #password: ''
+#      url: jdbc:h2:mem:test
+#      driver-class-name: org.h2.Driver
+#      username: sa
+#      password: ''
       url: jdbc:mysql://localhost:3318/cardsdb
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
       password: root
    jpa:
-      database-platform: org.hibernate.dialect.MySQLDialect
       hibernate:
          ddl-auto: update
       show-sql: true
@@ -29,3 +28,20 @@ management:
     web:
       exposure:
         include: "*"
+  info:
+     env:
+        enabled: true
+        
+eureka:
+   instance:
+      preferIpAddress: true
+   client:
+      fetchRegistry: true
+      registerWithEureka: true
+      serviceUrl:
+         defaultZone: http://localhost:8070/eureka
+info:
+   app:
+      name: "cards"
+      description: "Microservizio che gestisce cards"
+      version: "1.0.0"

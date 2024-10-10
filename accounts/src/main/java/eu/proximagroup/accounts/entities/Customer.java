@@ -30,7 +30,7 @@ public class Customer extends BaseEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	@Column(name = "first_name")
     @NotEmpty(message = "first_name is required")
