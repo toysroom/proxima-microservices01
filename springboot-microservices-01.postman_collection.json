@@ -78,7 +78,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"accountNumber\": \"pippo1\",\n    \"accountType\": \"dddd\",\n    \"branchAddress\": \"dsad\",\n    \"firstName\": \"aaaa\",\n    \"lastName\": \"bbbb\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"+349jrwerwer\"\n}",
+									"raw": "{\n    \"accountNumber\": \"12345678\",\n    \"accountType\": \"dddd\",\n    \"branchAddress\": \"dsad\",\n    \"customerId\": 1\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -297,6 +297,59 @@
 							"response": []
 						},
 						{
+							"name": "customers/search",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/customers/search/params?mobileNumber=00393493203060",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"customers",
+										"search",
+										"params"
+									],
+									"query": [
+										{
+											"key": "mobileNumber",
+											"value": "00393493203060"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "customers/details",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{baseUrl}}/{{prefix}}/customers/details?mobileNumber=00393493203060",
+									"protocol": "http",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"{{prefix}}",
+										"customers",
+										"details"
+									],
+									"query": [
+										{
+											"key": "mobileNumber",
+											"value": "00393493203060"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "customers/{id} - 200",
 							"request": {
 								"method": "GET",
@@ -343,7 +396,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"firstName\": \"aaasdasd\",\n    \"lastName\": \"bbbb\",\n    \"email\": \"PIPPO@pluto.it\",\n    \"mobileNumber\": \"00393493203060\",\n    \"sex\": \"M\"\n}",
+									"raw": "{\n    \"firstName\": \"aaasdasd\",\n    \"lastName\": \"bbbb\",\n    \"email\": \"PIPeePO@pluto.it\",\n    \"mobileNumber\": \"00393493203060\",\n    \"sex\": \"M\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -614,6 +667,44 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "actuator/shutdown",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://{{baseUrl}}/actuator/shutdown",
+							"protocol": "http",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"actuator",
+								"shutdown"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actuator/info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{baseUrl}}/actuator/info",
+							"protocol": "http",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"actuator",
+								"info"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -675,6 +766,104 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "cards - 201",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobileNumber\": \"00393493203060\",\n\t\"cardNumber\": \"affsd\",\n    \"cardType\": \"fsdfsdf\",\n    \"totalLimit\": 3456,\n    \"amountPaid\": 235,\n    \"availableAmount\": 5345\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{baseUrl}}/{{prefix}}/cards",
+							"protocol": "http",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{prefix}}",
+								"cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cards - 200",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobileNumber\": \"00393493203060\",\n\t\"cardNumber\": \"affsd\",\n    \"cardType\": \"fsdfsdf\",\n    \"totalLimit\": 3456,\n    \"amountPaid\": 235,\n    \"availableAmount\": 5345\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{baseUrl}}/{{prefix}}/cards",
+							"protocol": "http",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{prefix}}",
+								"cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cards/search/params - 200",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobileNumber\": \"00393493203060\",\n\t\"cardNumber\": \"affsd\",\n    \"cardType\": \"fsdfsdf\",\n    \"totalLimit\": 3456,\n    \"amountPaid\": 235,\n    \"availableAmount\": 5345\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{baseUrl}}/{{prefix}}/cards/search/params?mobileNumber=00393493203060",
+							"protocol": "http",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{prefix}}",
+								"cards",
+								"search",
+								"params"
+							],
+							"query": [
+								{
+									"key": "mobileNumber",
+									"value": "00393493203060"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -732,6 +921,104 @@
 							"path": [
 								"actuator",
 								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loans - 200",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobileNumber\": \"00393493203060\",\n\t\"cardNumber\": \"affsd\",\n    \"cardType\": \"fsdfsdf\",\n    \"totalLimit\": 3456,\n    \"amountPaid\": 235,\n    \"availableAmount\": 5345\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{baseUrl}}/{{prefix}}/loans",
+							"protocol": "http",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{prefix}}",
+								"loans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loans/search/params - 200",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobileNumber\": \"00393493203060\",\n\t\"cardNumber\": \"affsd\",\n    \"cardType\": \"fsdfsdf\",\n    \"totalLimit\": 3456,\n    \"amountPaid\": 235,\n    \"availableAmount\": 5345\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{baseUrl}}/{{prefix}}/loans/search/params?mobileNumber=00393493203060",
+							"protocol": "http",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{prefix}}",
+								"loans",
+								"search",
+								"params"
+							],
+							"query": [
+								{
+									"key": "mobileNumber",
+									"value": "00393493203060"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loans - 201",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobileNumber\": \"00393493203060\",\n    \"loanNumber\": \"hjhjk\",\n\t\"loanType\": \"affsd\",\n    \"totalLoan\": 45637567,\n    \"amountPaid\": 235,\n    \"outstandingAmount\": 5345\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{baseUrl}}/{{prefix}}/loans",
+							"protocol": "http",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{prefix}}",
+								"loans"
 							]
 						}
 					},
@@ -938,6 +1225,56 @@
 					]
 				},
 				{
+					"name": "eureka",
+					"item": [
+						{
+							"name": "eurekaserver/default",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8071/eurekaserver/default",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8071",
+									"path": [
+										"eurekaserver",
+										"default"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "gatewayserver",
+					"item": [
+						{
+							"name": "gatewayserver/default",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8071/gatewayserver/default",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8071",
+									"path": [
+										"gatewayserver",
+										"default"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "encrypt",
 					"request": {
 						"method": "POST",
@@ -988,6 +1325,419 @@
 							"port": "8071",
 							"path": [
 								"decrypt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8071/actuator/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8071",
+							"path": [
+								"actuator",
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "eurekaserver",
+			"item": [
+				{
+					"name": "health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8070/actuator/health/readiness",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8070",
+							"path": [
+								"actuator",
+								"health",
+								"readiness"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eureka/apps",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8070/eureka/apps",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8070",
+							"path": [
+								"eureka",
+								"apps"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eureka/apps/accounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8070/eureka/apps/accounts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8070",
+							"path": [
+								"eureka",
+								"apps",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "gatewayserver",
+			"item": [
+				{
+					"name": "customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8072/ACCOUNTS/api/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"ACCOUNTS",
+								"api",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "customers - 201",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "client_authentication",
+									"value": "body",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "ZU7OAfk2sNoUMDm3E6ngNQoQLmT8Gtj0",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "proxima-postman-microservices-01",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"aaasdasd\",\n    \"lastName\": \"bbbb\",\n    \"email\": \"ggggf@pluto.it\",\n    \"mobileNumber\": \"003934343223065\",\n    \"sex\": \"M\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8072/proxima/accounts/api/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"proxima",
+								"accounts",
+								"api",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "customers - 201 Copy",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "scope",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "proxima-postman-microservices-01",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "eGWS146oZo8MLyc5sjbANrc33NQSS4wJ",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "clientcredentails_accesstoken",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "client_authentication",
+									"value": "body",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"aaasdasd\",\n    \"lastName\": \"bbbb\",\n    \"email\": \"asdasdasd@pluto.it\",\n    \"mobileNumber\": \"003934393203060\",\n    \"sex\": \"M\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8072/proxima/accounts/api/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"proxima",
+								"accounts",
+								"api",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "customers - LowerCase",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8072/proxima/accounts/api/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"proxima",
+								"accounts",
+								"api",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "customers Copy 2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8072/accounts/api/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"accounts",
+								"api",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actuator",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8072/actuator",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"actuator"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actuator/gateway/routes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8072/actuator/gateway/routes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"actuator",
+								"gateway",
+								"routes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "keycloack",
+			"item": [
+				{
+					"name": "token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "proxima-postman-microservices-01",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "eGWS146oZo8MLyc5sjbANrc33NQSS4wJ",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"realms",
+								"master",
+								"protocol",
+								"openid-connect",
+								"token"
 							]
 						}
 					},
